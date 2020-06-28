@@ -12,7 +12,6 @@ public class ProductController {
 
     @GetMapping("/get/{id}")
     public Product get(@PathVariable Long id) throws InterruptedException {
-        Thread.sleep(1000);
         return new Product(id, "Product" + id);
     }
 }

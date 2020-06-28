@@ -22,16 +22,6 @@ public class CacheController {
 
     @GetMapping("/get/{id}")
     public Product get(@PathVariable Long id) {
-        for (int i = 0; i < 20; i++) {
-            new Thread(new Runnable(){
-                @Override
-                public void run() {
-                    ProductCommand productCommand = new ProductCommand(restTemplate, id);
-                    System.out.println(productCommand.execute());
-
-                }
-            }).start();
-        }
         return new ProductCommand(restTemplate, id).execute();
     }
 }

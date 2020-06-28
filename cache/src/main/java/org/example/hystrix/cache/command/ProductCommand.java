@@ -7,7 +7,6 @@ import org.springframework.web.client.RestTemplate;
 
 public class ProductCommand extends HystrixCommand<Product> {
 
-
     private RestTemplate restTemplate;
     private Long id;
 
@@ -36,13 +35,9 @@ public class ProductCommand extends HystrixCommand<Product> {
         return restTemplate.getForObject("http://localhost:9001/product/get/" + id, Product.class);
     }
 
-//    @Override
-//    protected String getCacheKey() {
-//        return id + "";
-//    }
-
     @Override
     protected Product getFallback() {
         return new Product(-999L, "Product9999");
     }
+
 }

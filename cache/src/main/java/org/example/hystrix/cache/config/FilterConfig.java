@@ -1,7 +1,9 @@
 package org.example.hystrix.cache.config;
 
+import com.netflix.hystrix.contrib.metrics.eventstream.HystrixMetricsStreamServlet;
 import org.example.hystrix.cache.filter.HystrixContextFilter;
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
+import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -15,4 +17,11 @@ public class FilterConfig {
 //        registrationBean.addUrlPatterns("/*");
 //        return registrationBean;
 //    }
+
+    @Bean
+    public ServletRegistrationBean indexServletRegistration() {
+        ServletRegistrationBean registration = new ServletRegistrationBean(new HystrixMetricsStreamServlet());
+        registration.addUrlMappings("/hystrix.stream");
+        return registration;
+    }
 }
